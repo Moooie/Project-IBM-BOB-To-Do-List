@@ -1,0 +1,402 @@
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0 var(--space-md);
+  height: 38px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background var(--transition-fast), color var(--transition-fast),
+              box-shadow var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn:active { transform: scale(0.96); }
+
+.btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn--primary:hover {
+  background: var(--color-accent-hover);
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+.btn--ghost:hover {
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+.btn--icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+.btn--icon:hover {
+  background: var(--color-surface-alt);
+  color: var(--color-danger);
+}
+
+.btn--clear-all { color: var(--color-text-dim); }
+
+/* ============================================================
+   TASK ITEM
+   ============================================================ */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+  transition: border-color var(--transition-fast),
+              background var(--transition-fast),
+              transform var(--transition-normal),
+              box-shadow var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.task-item:hover {
+  border-color: var(--color-border-light);
+  background: var(--color-surface-alt);
+  box-shadow: var(--shadow-sm);
+}
+
+.task-item.is-completed {
+  background: #14161f;
+  border-color: var(--color-border);
+}
+
+.task-item.is-completed .task-text {
+  color: var(--color-text-dim);
+  text-decoration: line-through;
+  text-decoration-color: var(--color-text-dim);
+}
+
+/* Priority accent line */
+.task-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--color-accent);
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+.task-item:hover::before { opacity: 1; }
+.task-item.is-completed::before { background: var(--color-success); opacity: 0.5; }
+
+/* Checkbox */
+.task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--transition-fast),
+              background var(--transition-fast),
+              transform var(--transition-slow);
+}
+
+.task-checkbox:hover {
+  border-color: var(--color-accent);
+}
+
+.task-checkbox:checked {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  transform: scale(1.1);
+}
+
+.task-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 8px; height: 12px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* Task text */
+.task-text {
+  flex: 1;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  word-break: break-word;
+  transition: color var(--transition-fast);
+}
+
+/* Task actions */
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.task-item:hover .task-actions,
+.task-item:focus-within .task-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.task-action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.task-action-btn:hover { transform: scale(1.15); }
+.task-action-btn--edit:hover { background: var(--color-accent-glow); color: var(--color-accent-hover); }
+.task-action-btn--delete:hover { background: var(--color-danger-bg); color: var(--color-danger); }
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  width: min(480px, 90vw);
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.92) translateY(12px);
+  transition: transform var(--transition-slow);
+}
+
+.modal-overlay.is-open .modal {
+  transform: scale(1) translateY(0);
+}
+
+.modal-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+}
+
+.modal-input {
+  width: 100%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  margin-bottom: var(--space-lg);
+}
+
+.modal-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.empty-state {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  display: none;
+}
+.empty-state.is-visible { display: block; }
+.empty-icon { font-size: 2.5rem; margin-bottom: var(--space-md); opacity: 0.5; }
+.empty-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+.empty-sub { font-size: 0.8125rem; color: var(--color-text-dim); }
+
+/* ============================================================
+   DATETIME ROW (add-form)
+   ============================================================ */
+.datetime-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.datetime-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  flex: 1;
+  min-width: 140px;
+}
+
+.datetime-field:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.datetime-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+}
+
+.datetime-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-size: 0.8125rem;
+  min-width: 0;
+  /* Tint the calendar/clock picker icon */
+  color-scheme: dark;
+}
+
+.datetime-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.6) sepia(1) saturate(2) hue-rotate(200deg);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+.datetime-input::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+
+.btn--clear-dt {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   MODAL DATETIME ROW
+   ============================================================ */
+.modal-datetime-row {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.modal-datetime-row .datetime-field {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* ============================================================
+   TASK BODY & DUE BADGE
+   ============================================================ */
+.task-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.task-body .task-text {
+  /* override flex:1 from direct child rule */
+  flex: unset;
+}
+
+.due-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 1px 8px;
+  width: fit-content;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.due-badge::before {
+  content: '🗓';
+  font-size: 0.65rem;
+}
+
+.due-badge.is-overdue {
+  color: var(--color-danger);
+  border-color: var(--color-danger-bg);
+  background: var(--color-danger-bg);
+}
+
+.due-badge.is-overdue::before { content: '⚠'; }
+
+/* Completed task: dim the badge further */
+.task-item.is-completed .due-badge {
+  opacity: 0.4;
+}
