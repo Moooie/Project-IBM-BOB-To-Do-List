@@ -2,7 +2,7 @@
 
 Aplikasi web manajemen tugas (To-Do List) interaktif yang dibangun menggunakan HTML5, CSS3, dan Vanilla JavaScript modular. Dikembangkan untuk program IBM BOB.
 
-## 🚀 Fitur Utama
+##  Fitur Utama
 
 - **Manajemen Tugas Lengkap (CRUD):** Tambah tugas baru, tandai selesai (*toggle complete*), edit teks dan tenggat waktu via modal, serta hapus tugas.
 - **Jadwal & Tenggat Waktu (*Due Date & Time*):** Dukungan penetapan tanggal dan jam batas waktu dengan indikator otomatis untuk tugas yang telah terlewat (*overdue*).
